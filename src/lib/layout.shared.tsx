@@ -20,11 +20,11 @@ export function baseOptions(): BaseLayoutProps {
     },
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [
-      {
-        icon: <Brain />,
-        text: "Navigator AI",
-        url: "/n",
-      },
+      // {
+      //   icon: <Brain />,
+      //   text: "Navigator AI",
+      //   url: "/n",
+      // },
     ],
   };
 }
