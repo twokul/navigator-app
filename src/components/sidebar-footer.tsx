@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function SidebarFooter() {
   return (
@@ -31,7 +32,7 @@ export default function SidebarFooter() {
           <DropdownMenuItem>
             <div className="flex flex-row items-center gap-2">
               <LogOut className="size-4" />
-              <span>Logout</span>
+              <LogoutLink>Logout</LogoutLink>
             </div>
           </DropdownMenuItem>
         </DropdownMenuContent>
