@@ -1,18 +1,24 @@
-// "use client";
-
 import "@/app/global.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "@/components/auth-provider";
-// import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+import type { Metadata } from "next";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function Layout({ children }: LayoutProps<"/">) {
-  // const { getPermissions, getToken } = useKindeAuth();
+export const metadata: Metadata = {
+  title: "Dentist Abroad Navigator",
+  description: "The Fastest Pathway for International Dentists to U.S. Dental Schools.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+};
 
+export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <AuthProvider>
       <html lang="en" className={inter.className} suppressHydrationWarning>
