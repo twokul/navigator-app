@@ -20,9 +20,8 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "file.notion.so",
+        hostname: "images.unsplash.com",
         port: "",
-        pathname: "/f/f/**",
       },
     ],
   },
