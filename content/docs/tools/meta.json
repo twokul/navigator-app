@@ -1,3 +1,8 @@
 {
-  "pages": ["checklist", "university-finder"]
+  "pages": [
+    "checklist",
+    "schools-finder",
+    "school-evaluation-template",
+    "school-professional-alignment-template"
+  ]
 }
