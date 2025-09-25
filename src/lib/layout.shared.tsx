@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { Brain, Compass } from "lucide-react";
+import { Compass } from "lucide-react";
 
 /**
  * Shared layout configurations

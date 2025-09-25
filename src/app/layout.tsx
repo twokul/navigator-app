@@ -1,13 +1,18 @@
+// "use client";
+
 import "@/app/global.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "@/components/auth-provider";
+// import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
 export default function Layout({ children }: LayoutProps<"/">) {
+  // const { getPermissions, getToken } = useKindeAuth();
+
   return (
     <AuthProvider>
       <html lang="en" className={inter.className} suppressHydrationWarning>

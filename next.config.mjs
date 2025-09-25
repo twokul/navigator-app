@@ -4,6 +4,17 @@ const withMDX = createMDX();
 
 /** @type {import('next').NextConfig} */
 const config = {
+  /**
+   * https://docs.kinde.com/developer-tools/sdks/backend/nextjs-sdk/#state-not-found-error
+   */
+  env: {
+    KINDE_SITE_URL: process.env.KINDE_SITE_URL ?? `https://${process.env.VERCEL_URL}`,
+    KINDE_POST_LOGOUT_REDIRECT_URL:
+      process.env.KINDE_POST_LOGOUT_REDIRECT_URL ?? `https://${process.env.VERCEL_URL}`,
+    KINDE_POST_LOGIN_REDIRECT_URL:
+      process.env.KINDE_POST_LOGIN_REDIRECT_URL ??
+      `https://${process.env.VERCEL_URL}/c/getting-started/introduction`,
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [

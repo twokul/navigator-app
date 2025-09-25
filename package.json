@@ -8,13 +8,17 @@
     "start": "next start",
     "postinstall": "fumadocs-mdx",
     "lint": "eslint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:unit": "vitest",
+    "test:integration": "playwright test"
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.9.2",
+    "@kinde-oss/kinde-typescript-sdk": "^2.13.0",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "debug": "^4.4.3",
     "fumadocs-core": "15.7.13",
     "fumadocs-mdx": "11.10.1",
     "fumadocs-ui": "15.7.13",
@@ -22,11 +26,13 @@
     "next": "15.5.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "stripe": "^18.5.0",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.13",
+    "@types/debug": "^4.1.12",
     "@types/mdx": "^2.0.13",
     "@types/node": "24.3.3",
     "@types/react": "^19.1.13",

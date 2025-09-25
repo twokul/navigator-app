@@ -1,0 +1,11 @@
+---
+description:
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+alwaysApply: true
+---
+
+## Types
+
+- Do not use `any`; prefer `unknown`.

@@ -1,0 +1,57 @@
+---
+description:
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+This rule provides standards for all the code in the project.
+
+Always adhere to these best programming practices when generating, editing, or
+suggesting code:
+
+- DRY Principle (Don't Repeat Yourself): Avoid code duplication. Extract
+  repeated logic into reusable functions, classes, modules, or components. If code
+  appears more than twice, refactor it into a shared abstraction.
+- Readability and Maintainability: Use meaningful, descriptive names for
+  variables, functions, and classes (e.g., calculateTotalPrice instead of ctp).
+  Keep functions short and focused on a single responsibility (Single
+  Responsibility Principle). Add concise comments only for complex logic—code
+  should be self-explanatory where possible.
+- Modularity and Separation of Concerns: Break down code into small, independent
+  modules or files. Separate business logic, data access, UI, and configuration.
+- Use design patterns like MVC, Factory, or Observer when appropriate to promote
+  loose coupling and high cohesion.
+- Error Handling and Robustness: Always handle potential errors gracefully. Use
+  try-catch blocks, validate inputs, and provide meaningful error messages. Avoid
+  silent failures—log errors and ensure the program can recover or fail safely.
+- Performance Optimization: Write efficient code from the start, but optimize
+  only when necessary (profile first). Avoid premature optimization. Use
+  appropriate data structures (e.g., hash maps for fast lookups) and algorithms
+  with good time/space complexity.
+- Testing and Quality Assurance: Encourage writing unit tests, integration
+  tests, and end-to-end tests. Aim for high test coverage on critical paths.
+  Follow TDD (Test-Driven Development) where it fits to ensure code reliability.
+- Security Best Practices: Sanitize inputs to prevent injections (e.g., SQL,
+  XSS). Use secure authentication/authorization patterns. Avoid hardcoding
+  secrets—use environment variables or secret managers.
+- Version Control and Collaboration: Write commit messages that are clear and
+  descriptive. Follow branching strategies like Git Flow. Review code changes
+  thoroughly.
+- Language and Framework Conventions: Adhere to the idioms and style guides of
+  the language/framework (e.g., PEP 8 for Python, Airbnb style for JavaScript).
+  Use linters and formatters to enforce consistency.
+- Scalability and Future-Proofing: Design for extensibility—avoid tight
+  coupling. Consider edge cases, scalability needs (e.g., handling large data
+  sets), and future requirements during implementation.
+- Documentation: Maintain inline docs for APIs and complex functions (e.g.,
+  JSDoc, Python docstrings). Keep external docs updated for architecture and
+  usage.
+
+Apply these principles proactively in all code suggestions, edits, or
+generations to produce professional, high-quality output. If a trade-off is
+needed (e.g., for prototyping), explicitly note it and suggest improvements.
+
+## Code Quality
+
+- Check for linting errors and fix them after every code generation via `pnpm lint`

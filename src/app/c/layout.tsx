@@ -2,6 +2,7 @@ import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { baseOptions } from "@/lib/layout.shared";
 import { source } from "@/lib/source";
 import SidebarFooter from "@/components/sidebar-footer";
+import PaymentGuard from "@/components/payment-guard";
 
 export default function Layout({ children }: LayoutProps<"/c">) {
   const base = baseOptions();
@@ -11,8 +12,10 @@ export default function Layout({ children }: LayoutProps<"/c">) {
   };
 
   return (
-    <DocsLayout tree={source.pageTree} {...base} sidebar={sidebar}>
-      {children}
-    </DocsLayout>
+    <PaymentGuard>
+      <DocsLayout tree={source.pageTree} {...base} sidebar={sidebar}>
+        {children}
+      </DocsLayout>
+    </PaymentGuard>
   );
 }
