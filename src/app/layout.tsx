@@ -2,6 +2,7 @@ import "@/app/global.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/auth-provider";
+import { AISearchTrigger } from "@/components/search";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
       >
         <body className="flex min-h-screen flex-col">
           <RootProvider>{children}</RootProvider>
+          <AISearchTrigger />
         </body>
       </html>
     </AuthProvider>

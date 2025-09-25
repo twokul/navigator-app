@@ -12,6 +12,9 @@ const customFrontmatterSchema = frontmatterSchema.extend({
 export const docs = defineDocs({
   docs: {
     schema: customFrontmatterSchema,
+    postprocess: {
+      includeProcessedMarkdown: true,
+    },
   },
   meta: {
     schema: metaSchema,
