@@ -1,4 +1,3 @@
 {
-  "root": true,
-  "pages": ["caapid-guide", "caapid-qa"]
+  "pages": ["guide", "faq"]
 }
