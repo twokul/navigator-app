@@ -1,9 +1,14 @@
 {
   "root": true,
   "pages": [
-    "getting-started",
-    "choosing-your-path",
+    "introduction",
+    "us-dental-licensure",
     "advanced-standing-program-application",
+    "caapid",
+    "bench-test-preparation",
+    "inbde-guide",
+    "toefl-guide",
+    "personal-statement",
     "researching-schools",
     "finances-and-logistics",
     "related-paths-and-resources",

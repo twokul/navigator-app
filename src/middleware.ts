@@ -1,6 +1,6 @@
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
 import type { NextRequest } from "next/server";
-import { KindeClient } from "@/lib/kinde-client";
+// import { KindeClient } from "@/lib/kinde-client";
 
 interface KindeAuthRequest extends NextRequest {
   kindeAuth: {
@@ -35,8 +35,8 @@ interface KindeAuthRequest extends NextRequest {
  */
 export default withAuth(
   async function middleware(req: KindeAuthRequest) {
-    const kindeClient = KindeClient.fromEnv();
-    await kindeClient.refreshUserClaims(req.kindeAuth.user.id);
+    // const kindeClient = KindeClient.fromEnv();
+    // await kindeClient.refreshUserClaims(req.kindeAuth.user.id);
   },
   {
     publicPaths: ["/api/stripe", "/api/auth", "/api/check-payment", "/_next", "/favicon.ico"],

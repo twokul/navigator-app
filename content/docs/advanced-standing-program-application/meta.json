@@ -1,20 +1,3 @@
 {
-  "pages": [
-    "overview",
-    "comparison-of-programs",
-    "detailed-guide",
-    "exams",
-    "inbde-guide",
-    "toefl-guide",
-    "lor-guide",
-    "bench-test-guide",
-    "applications",
-    "caapid-guide",
-    "personal-interview-guide",
-    "student-visa-guide",
-    "loans-guide",
-    "letters-of-recommendation",
-    "personal-statement",
-    "interview-prep"
-  ]
+  "pages": ["quick-overview", "detailed-guide"]
 }

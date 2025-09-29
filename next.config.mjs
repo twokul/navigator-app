@@ -13,7 +13,7 @@ const config = {
       process.env.KINDE_POST_LOGOUT_REDIRECT_URL ?? `https://${process.env.VERCEL_URL}`,
     KINDE_POST_LOGIN_REDIRECT_URL:
       process.env.KINDE_POST_LOGIN_REDIRECT_URL ??
-      `https://${process.env.VERCEL_URL}/c/getting-started/introduction`,
+      `https://${process.env.VERCEL_URL}/c/introduction`,
   },
   reactStrictMode: true,
   images: {
@@ -29,7 +29,7 @@ const config = {
     return [
       {
         source: "/c",
-        destination: "/c/getting-started/introduction",
+        destination: "/c/introduction",
         permanent: true,
       },
     ];
