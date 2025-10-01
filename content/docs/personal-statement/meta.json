@@ -1,3 +1,8 @@
 {
-  "pages": ["personal-statement"]
+  "pages": [
+    "introduction",
+    "how-to-write-an-impactful-personal-statement",
+    "story-telling",
+    "examples"
+  ]
 }
