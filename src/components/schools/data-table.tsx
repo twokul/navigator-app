@@ -25,8 +25,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
-import { DataTableFacetedFilter, FacetedFilterOption } from "./data-table-faceted-filter";
-
+import {
+  DataTableFacetedFilter,
+  FacetedFilterOption,
+} from "@/components/schools/data-table-faceted-filter";
+import { School } from "@/components/schools/columns";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -51,10 +54,10 @@ export function DataTable<TData, TValue>({
 
   // Filter data based on status, program, and state filters
   const filteredData = useMemo(() => {
-    return data.filter((item: any) => {
+    return data.filter((item: TData) => {
       // Filter by status
       if (statusFilter.length > 0) {
-        const hasMatchingStatus = item.status?.some((status: string) =>
+        const hasMatchingStatus = (item as School).status?.some((status: string) =>
           statusFilter.includes(status),
         );
         if (!hasMatchingStatus) return false;
@@ -62,7 +65,7 @@ export function DataTable<TData, TValue>({
 
       // Filter by programs
       if (programFilter.length > 0) {
-        const hasMatchingProgram = item.programs?.some((program: string) =>
+        const hasMatchingProgram = (item as School).programs?.some((program: string) =>
           programFilter.includes(program),
         );
         if (!hasMatchingProgram) return false;
@@ -70,7 +73,7 @@ export function DataTable<TData, TValue>({
 
       // Filter by state
       if (stateFilter.length > 0) {
-        const hasMatchingState = stateFilter.includes(item.state);
+        const hasMatchingState = stateFilter.includes((item as School).state);
         if (!hasMatchingState) return false;
       }
 
