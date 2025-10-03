@@ -29,14 +29,25 @@ export default async function Page(props: PageProps<"/c/[[...slug]]">) {
       <DocsPage toc={page.data.toc} full={page.data.full}>
         <DocsTitle>{page.data.title}</DocsTitle>
         <DocsDescription>{page.data.description}</DocsDescription>
-        <DocsBody>
-          <MDXContent
-            components={getMDXComponents({
-              // this allows you to link to other pages with relative file paths
-              a: createRelativeLink(source, page),
-            })}
-          />
-        </DocsBody>
+        {page.data.dynamicContent ? (
+          <div className="flex-1">
+            <MDXContent
+              components={getMDXComponents({
+                // this allows you to link to other pages with relative file paths
+                a: createRelativeLink(source, page),
+              })}
+            />
+          </div>
+        ) : (
+          <DocsBody>
+            <MDXContent
+              components={getMDXComponents({
+                // this allows you to link to other pages with relative file paths
+                a: createRelativeLink(source, page),
+              })}
+            />
+          </DocsBody>
+        )}
       </DocsPage>
     </>
   );
@@ -49,7 +60,9 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: PageProps<"/c/[[...slug]]">): Promise<Metadata> {
   const params = await props.params;
   const page = source.getPage(params.slug);
-  if (!page) notFound();
+  if (!page) {
+    notFound();
+  }
 
   const metadata: Metadata = {
     title: page.data.title,

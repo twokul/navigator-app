@@ -34,7 +34,7 @@ interface KindeAuthRequest extends NextRequest {
  * ```
  */
 export default withAuth(
-  async function middleware(req: KindeAuthRequest) {
+  async function middleware(_req: KindeAuthRequest) {
     // const kindeClient = KindeClient.fromEnv();
     // await kindeClient.refreshUserClaims(req.kindeAuth.user.id);
   },

@@ -4,6 +4,7 @@ import { z } from "zod";
 // Custom frontmatter schema with coverImage
 const customFrontmatterSchema = frontmatterSchema.extend({
   coverImage: z.string().optional(),
+  dynamicContent: z.boolean().optional(),
 });
 
 // You can customise Zod schemas for frontmatter and `meta.json` here

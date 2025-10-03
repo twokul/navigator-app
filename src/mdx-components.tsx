@@ -2,6 +2,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { Lightbulb } from "lucide-react";
+import { SchoolsDataTable } from "@/components/schools/schools-data-table";
 
 function CustomAside({ children, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (
@@ -51,5 +52,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ...components,
     Aside: CustomAside,
     CloudflareVideo: CloudflareVideo,
+    SchoolsDataTable: SchoolsDataTable,
   };
 }
