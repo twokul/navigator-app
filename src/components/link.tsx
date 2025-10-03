@@ -20,16 +20,19 @@ export function Link({
   rel = "noopener noreferrer",
   ...props
 }: LinkProps) {
-  // Check if href is a link key (doesn't start with http/https and contains dots)
+  // Check if href is an email address
+  const isEmail = href.includes("@") && href.includes(".");
+
+  // Check if href is a link key (doesn't start with http/https, contains dots, but is not an email)
   const isLinkKey =
     !href.startsWith("http") &&
     !href.startsWith("/") &&
     !href.startsWith("#") &&
+    !isEmail &&
     href.includes(".");
 
   const actualHref = isLinkKey ? getLink(href) || "#" : href;
-  const shouldOpenInNewTab =
-    actualHref.startsWith("http") && !actualHref.includes(window?.location?.origin || "");
+  const shouldOpenInNewTab = actualHref.startsWith("http") && !actualHref.startsWith("mailto:");
 
   return (
     <a

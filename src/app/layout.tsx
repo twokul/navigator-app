@@ -1,11 +1,18 @@
 import "@/app/global.css";
 import { RootProvider } from "fumadocs-ui/provider";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/auth-provider";
 import type { Metadata } from "next";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({
+const fontSans = Geist({
   subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const fontMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +28,11 @@ export const metadata: Metadata = {
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <AuthProvider>
-      <html lang="en" className={inter.className} suppressHydrationWarning>
+      <html
+        lang="en"
+        className={cn(`${fontSans.variable} ${fontMono.variable} font-sans antialiased`)}
+        suppressHydrationWarning
+      >
         <body className="flex min-h-screen flex-col">
           <RootProvider>{children}</RootProvider>
         </body>

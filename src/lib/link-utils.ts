@@ -146,6 +146,12 @@ export function replaceHardcodedUrls(text: string): string {
       pattern: /https:\/\/www\.reddit\.com\/user\/thefrenchdentiste\//g,
       key: "social.reddit.frenchDentiste",
     },
+    {
+      pattern: /https:\/\/www\.instagram\.com\/dentist\.abroad\//g,
+      key: "social.instagram.dentistAbroad",
+    },
+    { pattern: /https:\/\/www\.youtube\.com\/@dent\.abroad/g, key: "social.youtube.dentAbroad" },
+    { pattern: /dr\.dent\.abroad@gmail\.com/g, key: "contact.email" },
   ];
 
   for (const replacement of replacements) {

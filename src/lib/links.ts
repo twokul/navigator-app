@@ -103,6 +103,12 @@ export const links = {
 
   // Social Media & Communities
   social: {
+    instagram: {
+      dentistAbroad: "https://www.instagram.com/dentist.abroad/",
+    },
+    youtube: {
+      dentAbroad: "https://www.youtube.com/@dent.abroad",
+    },
     facebook: {
       caapid: "https://www.facebook.com/groups/caapid/?ref=share&mibextid=NSMWBT",
       inbde: "https://www.facebook.com/groups/inbde",
@@ -189,6 +195,11 @@ export const links = {
       secondary2: "https://www.youtube.com/embed/rfR-2AoSPAw?si=KaBzKz71LiV0icxN",
     },
     inbde: "https://www.youtube.com/embed/s_wEiA-Lsk4?si=9v9UD3lr5Ux_ON5F",
+  },
+
+  // Contact Information
+  contact: {
+    email: "dr.dent.abroad@gmail.com",
   },
 
   // Additional Resources

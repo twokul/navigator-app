@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { getMDXComponents } from "@/mdx-components";
+import { Link } from "@/components/link";
 import Image from "next/image";
+import type { ComponentProps } from "react";
 
 export default async function Page(props: PageProps<"/c/[[...slug]]">) {
   const params = await props.params;
@@ -33,8 +35,23 @@ export default async function Page(props: PageProps<"/c/[[...slug]]">) {
           <div className="flex-1">
             <MDXContent
               components={getMDXComponents({
-                // this allows you to link to other pages with relative file paths
-                a: createRelativeLink(source, page),
+                // Custom link handler that supports both internal and external links
+                a: (props: ComponentProps<"a">) => {
+                  // Check if it's an internal link (starts with / or #)
+                  if (props.href?.startsWith("/") || props.href?.startsWith("#")) {
+                    return createRelativeLink(source, page)(props);
+                  }
+                  // For external links and link keys, use our Link component
+                  // Ensure href is defined before passing to Link
+                  if (!props.href) {
+                    return <a {...props} />;
+                  }
+                  return (
+                    <Link href={props.href} className={props.className} {...props}>
+                      {props.children}
+                    </Link>
+                  );
+                },
               })}
             />
           </div>
@@ -42,8 +59,23 @@ export default async function Page(props: PageProps<"/c/[[...slug]]">) {
           <DocsBody>
             <MDXContent
               components={getMDXComponents({
-                // this allows you to link to other pages with relative file paths
-                a: createRelativeLink(source, page),
+                // Custom link handler that supports both internal and external links
+                a: (props: ComponentProps<"a">) => {
+                  // Check if it's an internal link (starts with / or #)
+                  if (props.href?.startsWith("/") || props.href?.startsWith("#")) {
+                    return createRelativeLink(source, page)(props);
+                  }
+                  // For external links and link keys, use our Link component
+                  // Ensure href is defined before passing to Link
+                  if (!props.href) {
+                    return <a {...props} />;
+                  }
+                  return (
+                    <Link href={props.href} className={props.className} {...props}>
+                      {props.children}
+                    </Link>
+                  );
+                },
               })}
             />
           </DocsBody>
