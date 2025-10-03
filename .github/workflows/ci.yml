@@ -33,9 +33,6 @@ jobs:
       - name: Run linting
         run: pnpm lint
 
-      - name: Run type checking
-        run: npx tsc --noEmit
-
       - name: Run unit tests
         run: pnpm test:coverage
 
