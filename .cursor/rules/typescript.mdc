@@ -8,4 +8,4 @@ alwaysApply: true
 
 ## Types
 
-- Do not use `any`; prefer `unknown`.
+- Do not use `any` type; prefer `unknown` type.

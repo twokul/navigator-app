@@ -3,6 +3,8 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { Lightbulb } from "lucide-react";
 import { SchoolsDataTable } from "@/components/schools/schools-data-table";
+import { Link, ExternalLink, InternalLink } from "@/components/link";
+import { getLink } from "@/lib/links";
 
 function CustomAside({ children, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (
@@ -53,5 +55,11 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Aside: CustomAside,
     CloudflareVideo: CloudflareVideo,
     SchoolsDataTable: SchoolsDataTable,
+    // Link components for centralized link management
+    Link,
+    ExternalLink,
+    InternalLink,
+    // Utility function for getting links by key
+    getLink,
   };
 }
