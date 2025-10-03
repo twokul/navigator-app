@@ -1,23 +1,23 @@
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
-import type { NextRequest } from "next/server";
-import { KindeClient } from "@/lib/kinde-client";
+// import type { NextRequest } from "next/server";
+// import { KindeClient } from "@/lib/kinde-client";
 
-interface KindeAuthRequest extends NextRequest {
-  kindeAuth: {
-    token: {
-      org_code: string;
-      user_properties: {
-        paid: {
-          v: "true" | "false";
-        };
-      };
-    };
-    user: {
-      id: string;
-      email: string;
-    };
-  };
-}
+// interface KindeAuthRequest extends NextRequest {
+//   kindeAuth: {
+//     token: {
+//       org_code: string;
+//       user_properties: {
+//         paid: {
+//           v: "true" | "false";
+//         };
+//       };
+//     };
+//     user: {
+//       id: string;
+//       email: string;
+//     };
+//   };
+// }
 
 /**
  * Middleware function that handles authentication for the application.
@@ -34,10 +34,10 @@ interface KindeAuthRequest extends NextRequest {
  * ```
  */
 export default withAuth(
-  async function middleware(req: KindeAuthRequest) {
-    const kindeClient = KindeClient.fromEnv();
-    await kindeClient.refreshUserClaims(req.kindeAuth.user.id);
-  },
+  // async function middleware(_req: KindeAuthRequest) {
+  //   // const kindeClient = KindeClient.fromEnv();
+  //   // await kindeClient.refreshUserClaims(req.kindeAuth.user.id);
+  // },
   {
     publicPaths: ["/api/stripe", "/api/auth", "/api/check-payment", "/_next", "/favicon.ico"],
   },

@@ -1,0 +1,87 @@
+import React from "react";
+import { getLink } from "@/lib/links";
+
+interface LinkProps {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  target?: string;
+  rel?: string;
+}
+
+/**
+ * Component for rendering links that can handle both external URLs and link keys
+ */
+export function Link({
+  href,
+  children,
+  className,
+  target = "_blank",
+  rel = "noopener noreferrer",
+  ...props
+}: LinkProps) {
+  // Check if href is a link key (doesn't start with http/https and contains dots)
+  const isLinkKey =
+    !href.startsWith("http") &&
+    !href.startsWith("/") &&
+    !href.startsWith("#") &&
+    href.includes(".");
+
+  const actualHref = isLinkKey ? getLink(href) || "#" : href;
+  const shouldOpenInNewTab =
+    actualHref.startsWith("http") && !actualHref.includes(window?.location?.origin || "");
+
+  return (
+    <a
+      href={actualHref}
+      className={className}
+      target={shouldOpenInNewTab ? target : undefined}
+      rel={shouldOpenInNewTab ? rel : undefined}
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
+
+/**
+ * Component for rendering external links with consistent styling
+ */
+export function ExternalLink({
+  href,
+  children,
+  className = "",
+  ...props
+}: Omit<LinkProps, "target" | "rel">) {
+  return (
+    <Link
+      href={href}
+      className={`text-blue-600 underline hover:text-blue-800 ${className}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...props}
+    >
+      {children}
+    </Link>
+  );
+}
+
+/**
+ * Component for rendering internal links
+ */
+export function InternalLink({
+  href,
+  children,
+  className = "",
+  ...props
+}: Omit<LinkProps, "target" | "rel">) {
+  return (
+    <Link
+      href={href}
+      className={`text-blue-600 underline hover:text-blue-800 ${className}`}
+      {...props}
+    >
+      {children}
+    </Link>
+  );
+}

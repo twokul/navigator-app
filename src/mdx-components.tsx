@@ -2,6 +2,9 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { Lightbulb } from "lucide-react";
+import { SchoolsDataTable } from "@/components/schools/schools-data-table";
+import { Link, ExternalLink, InternalLink } from "@/components/link";
+import { getLink } from "@/lib/links";
 
 function CustomAside({ children, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (
@@ -22,6 +25,27 @@ function CustomAside({ children, ...props }: React.HTMLAttributes<HTMLElement>) 
   );
 }
 
+function CloudflareVideo({ url }: { url: string }) {
+  return (
+    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+      <iframe
+        src={url}
+        loading="lazy"
+        style={{
+          border: "none",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "100%",
+        }}
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowFullScreen={true}
+      ></iframe>
+    </div>
+  );
+}
+
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -29,5 +53,13 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Image,
     ...components,
     Aside: CustomAside,
+    CloudflareVideo: CloudflareVideo,
+    SchoolsDataTable: SchoolsDataTable,
+    // Link components for centralized link management
+    Link,
+    ExternalLink,
+    InternalLink,
+    // Utility function for getting links by key
+    getLink,
   };
 }
