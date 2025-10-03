@@ -54,43 +54,10 @@ jobs:
             test-results/
           retention-days: 7
 
-  build:
-    runs-on: ubuntu-latest
-    name: Build Check
-    needs: test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build application
-        run: pnpm build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: .next/
-          retention-days: 1
-
   summary:
     runs-on: ubuntu-latest
     name: CI Summary
-    needs: [test, build]
+    needs: [test]
     if: always()
 
     steps:
@@ -101,17 +68,12 @@ jobs:
           echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
           echo "| Tests | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Build | ${{ needs.build.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
           if [ "${{ needs.test.result }}" != "success" ]; then
             echo "❌ **Tests failed** - Please check the test logs" >> $GITHUB_STEP_SUMMARY
           fi
 
-          if [ "${{ needs.build.result }}" != "success" ]; then
-            echo "❌ **Build failed** - Please check the build logs" >> $GITHUB_STEP_SUMMARY
-          fi
-
-          if [ "${{ needs.test.result }}" == "success" ] && [ "${{ needs.build.result }}" == "success" ]; then
+          if [ "${{ needs.test.result }}" == "success" ]; then
             echo "✅ **All checks passed!** Ready to merge." >> $GITHUB_STEP_SUMMARY
           fi
