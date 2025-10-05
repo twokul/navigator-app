@@ -18,6 +18,11 @@ export const links = {
 
   // Official Dental Organizations & Applications
   official: {
+    adea: {
+      dentalInstitutions: "https://www.adea.org/for-members/ADEA-Members/dental-institutions",
+    },
+    natmatch: "https://natmatch.com/",
+    dat: "https://www.ada.org/education/testing/exams/dental-admission-test-dat",
     dentpin: "https://www.ada.org/education/manage-your-dentpin",
     ece: "https://www.ece.org/ECE/Credential-Evaluations",
     inbde: "https://jcnde.ada.org/inbde",
@@ -37,11 +42,53 @@ export const links = {
   states: {
     florida: {
       dentalHygieneApp: "https://floridasdentistry.gov/Applications/dental-hygiene-app.pdf",
+      dentistLicensure: "https://floridasdentistry.gov/licensing/dentist/",
     },
     massachusetts: {
       hygienistLicense: "https://www.mass.gov/how-to/apply-for-a-dental-hygienist-license",
+      limitedGeneral: "https://www.mass.gov/limited-dental-licenses",
+    },
+    illinois: {
+      dentistLicensure: "https://www.ilga.gov/commission/jcar/admincode/068/068012200A01000R.html",
+    },
+    michigan: {
+      dentistLicensure:
+        "https://www.michigan.gov/documents/lara/Dentistry_-_UG_-_March_2016_522006_7.pdf",
+    },
+    mississippi: {
+      dentistLicensure:
+        "https://www.dentalboard.ms.gov/licensure-examination-frequently-asked-questions",
+    },
+    minnesota: {
+      dentistLicensure: "https://mn.gov/boards/dentistry/",
+      limitedGeneral: "https://mn.gov/boards/dentistry/new-applicant/limited-general/",
+      tutorials: "https://mn.gov/boards/dentistry/new-applicant/tutorials/lgltutorial.jsp",
+    },
+    newYork: {
+      dentistLicensure: "http://www.op.nysed.gov/prof/dent/dentlic.htm#",
+    },
+    ohio: {
+      dentistLicensure:
+        "https://dental.ohio.gov/Licensure/Dentist#55637--initial-dental-licensure-for-graduates-of-an-unaccredited-dental-college-outside-the-united-states-application",
+    },
+    oregon: {
+      dentistLicensure: "https://www.oregon.gov/dentistry/pages/apply-license.aspx",
+    },
+    texas: {
+      dentistLicensure:
+        "http://tsbde.texas.gov/licensing/dentists/dentist-license-foreign-educated-graduates/",
+    },
+    virginia: {
+      dentistLicensure:
+        "https://www.dhp.virginia.gov/Boards/Dentistry/ApplicantResources/Applyforalicense/Dentist/%20https://www.license.dhp.virginia.gov/apply/Forms/Dentistry/Dentist_InstrForms.pdf",
+    },
+    washington: {
+      dentistLicensure:
+        "https://www.doh.wa.gov/LicensesPermitsandCertificates/ProfessionsNewReneworUpdate/Dentist/LicenseRequirements#heading26682",
     },
     connecticut: {
+      dentistLicensure:
+        "https://portal.ct.gov/DPH/Practitioner-Licensing--Investigations/Dentist/Licensure-Eligibility-Requirements-of-Graduate-of-Foreign-Dental-Schools",
       hygienistLicensure:
         "https://portal.ct.gov/dph/practitioner-licensing--investigations/dentalhygiene/dental-hygienist-licensure-of-foreign-trained-applicants",
       billTrack: "https://www.billtrack50.com/billdetail/1791303",
@@ -70,8 +117,10 @@ export const links = {
     dentalSpecialties: "http://www.dental-specialties.com/",
     massDental: "https://www.massdental.org/",
     ada: {
+      main: "https://www.ada.org/",
       volunteer: "https://www.ada.org/about/volunteer-and-get-involved-with-the-ada",
       news: "https://adanews.ada.org/ada-news/2024/november/new-ada-policies-empower-states-to-alleviate-dental-workforce-shortage/",
+      dentalLicensureMap: "https://www.ada.org/resources/licensure/dental-licensure-by-state-map",
     },
   },
 
