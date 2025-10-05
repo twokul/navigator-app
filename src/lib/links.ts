@@ -67,6 +67,12 @@ export const links = {
     newYork: {
       dentistLicensure: "http://www.op.nysed.gov/prof/dent/dentlic.htm#",
     },
+    newJersey: {
+      codeOfConduct:
+        "https://www.njconsumeraffairs.gov/regulations/Chapter-30-New-Jersey-Board-of-Dentistry.pdf",
+      dentistLicensure:
+        "https://www.njconsumeraffairs.gov/den/Applications/Application-for-a-Dental-License.pdf",
+    },
     ohio: {
       dentistLicensure:
         "https://dental.ohio.gov/Licensure/Dentist#55637--initial-dental-licensure-for-graduates-of-an-unaccredited-dental-college-outside-the-united-states-application",
