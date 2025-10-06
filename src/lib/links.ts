@@ -33,6 +33,17 @@ export const links = {
       dentpin: "http://www.ada.org/en/education-careers/dentpin",
       dentpinRegistrationPortal: "https://adadts.my.site.com/dts/s/login/SelfRegister",
     },
+    caapidApplication: "https://caapid.liaisoncas.com/",
+    caapidAchievements:
+      "https://help.liaisonedu.com/ADEA_CAAPID_Applicant_Help_Center/Filling_Out_Your_ADEA_CAAPID_Application/Supporting_Information/04_Achievements#Awards",
+    caapidExperiences:
+      "https://help.liaisonedu.com/ADEA_CAAPID_Applicant_Help_Center/Filling_Out_Your_ADEA_CAAPID_Application/Supporting_Information/02_Experiences",
+    caapidTestScores:
+      "https://help.liaisonedu.com/ADEA_CAAPID_Applicant_Help_Center/Sending_Your_Official_Transcripts%2C_Foreign_Evaluations%2C_and_Test_Scores_to_ADEA_CAAPID/Sending_Official_Test_Scores_to_ADEA_CAAPID",
+    caapidLORs:
+      "https://help.liaisonedu.com/ADEA_CAAPID_Applicant_Help_Center/Filling_Out_Your_ADEA_CAAPID_Application/Supporting_Information/01_Evaluations",
+    caapidShadowingLog:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/95687fc1-33fb-4b90-8232-4ae2b03a82c3/21fcb88c-4c53-4aeb-90a3-fd43a5f48349/Exampl_of_Houston_Shadowing_LOG.numbers",
     caapidProgramFinder: "https://programs.adea.org/CAAPID",
     natmatch: "https://natmatch.com/",
     dat: "https://www.ada.org/education/testing/exams/dental-admission-test-dat",
@@ -129,6 +140,7 @@ export const links = {
     studentDoctor: "https://dds.studentdoctor.net/",
     rushTranslate: "https://rushtranslate.com/certified-translation?ref=dentists-abroad",
     prometric: "https://www.prometric.com/",
+    bemoGuideEssaysPersonalStatements: "https://amzn.to/41vVvSw",
   },
 
   // Educational Programs
