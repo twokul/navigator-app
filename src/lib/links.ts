@@ -18,15 +18,36 @@ export const links = {
 
   // Official Dental Organizations & Applications
   official: {
+    edupass: "http://www.edupass.org/finaid/",
     adea: {
       dentalInstitutions: "https://www.adea.org/for-members/ADEA-Members/dental-institutions",
+      dentalSchools: "https://www.adea.org/dentalschools/",
+      caapidApplicantQuickGuide:
+        "https://www.adea.org/uploadedFiles/ADEA/Content_Conversion_Final/dental_education_pathways/CAAPID/ADEA_CAAPID-ApplicantQuickGuide-05.pdf",
+      caapidApplicantHelpCenter: "https://help.liaisonedu.com/ADEA_CAAPID_Applicant_Help_Center",
     },
+    studentVisaInformation:
+      "https://travel.state.gov/content/travel/en/us-visas/study/student-visa.html",
+    ada: {
+      dentalSchools: "https://www.ada.org/education/coda-program-finder",
+      dentpin: "http://www.ada.org/en/education-careers/dentpin",
+      dentpinRegistrationPortal: "https://adadts.my.site.com/dts/s/login/SelfRegister",
+    },
+    caapidProgramFinder: "https://programs.adea.org/CAAPID",
     natmatch: "https://natmatch.com/",
     dat: "https://www.ada.org/education/testing/exams/dental-admission-test-dat",
     dentpin: "https://www.ada.org/education/manage-your-dentpin",
+    eceHome: "https://www.ece.org/",
     ece: "https://www.ece.org/ECE/Credential-Evaluations",
+    eceUSInstitutions: "https://www.ece.org/US-Institutions",
+    eceDocumentationRequirements: "https://www.ece.org/Documentation-Requirements",
+    eceSampleReport: "https://www.ece.org/ECE-FIles/Sample-Reports/Sample_CBC_Report.pdf",
+    eceDocumentRequirement: "https://accounts.ece.org/DocumentRequirement/167",
+    wes: "https://www.wes.org/",
     inbde: "https://jcnde.ada.org/inbde",
+    inbdeApply: "https://jcnde.ada.org/inbde-apply",
     toefl: "https://www.ets.org/toefl.html",
+    toeflRegister: "https://www.ets.org/toefl/test-takers/ibt/take/register/",
     caapid: "https://www.adea.org/dental_education_pathways/CAAPID/Pages/ADEAPASSApplicants.aspx",
     pass: "https://www.adea.org/pass/",
     coda: "https://coda.ada.org/find-a-program/search-dental-programs#sort=%40codastatecitysort%20ascending",
@@ -104,6 +125,12 @@ export const links = {
     },
   },
 
+  external: {
+    studentDoctor: "https://dds.studentdoctor.net/",
+    rushTranslate: "https://rushtranslate.com/certified-translation?ref=dentists-abroad",
+    prometric: "https://www.prometric.com/",
+  },
+
   // Educational Programs
   programs: {
     nyu: "https://dental.nyu.edu/education/dental-hygiene-programs/degree-programs/advanced-standing.html",
@@ -111,6 +138,13 @@ export const links = {
     studentRdh: "https://www.studentrdh.com/national-dental-hygiene-board-review-nbdhe-studentrdh",
     cdca: "https://www.cdcaexams.org/",
     adex: "https://adextesting.org/",
+  },
+
+  stats: {
+    studentDoctor:
+      "https://www.studentdoctor.net/how-to-get-into-dental-school-2/north-american-dental-schools/",
+    bemo: "https://bemoacademicconsulting.com/blog/dental-school-acceptance-rates",
+    jackWestin: "https://jackwestin.com/resources/blog/dental-school-acceptance-rates-in-2023",
   },
 
   // Professional Organizations & Resources
