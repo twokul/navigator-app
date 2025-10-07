@@ -82,7 +82,7 @@ User's question: ${query}`,
   };
 
   const result = streamText({
-    model: openai("gpt-4o"),
+    model: openai("gpt-4o-mini"),
     tools: {
       provideLinks: {
         inputSchema: ProvideLinksToolSchema,
