@@ -6,7 +6,7 @@ import { embedMany, cosineSimilarity } from "ai";
 // Cache for embeddings to avoid recomputing
 const embeddingsCache = new Map<string, number[]>();
 
-export async function getRelevantContent(query: string, maxResults = 5) {
+export async function getRelevantContentServer(query: string, maxResults = 5) {
   try {
     // Validate query input
     if (!query || query.trim().length === 0) {
@@ -14,7 +14,7 @@ export async function getRelevantContent(query: string, maxResults = 5) {
       return [];
     }
 
-    // Get all pages
+    // Get all pages dynamically from the source
     const pages = source.getPages();
     const pageTexts = await Promise.all(pages.map(getLLMText));
 
@@ -42,7 +42,7 @@ export async function getRelevantContent(query: string, maxResults = 5) {
 
     // Get embeddings for all content (with caching)
     const contentEmbeddings = await Promise.all(
-      searchableContent.map(async (content, index) => {
+      searchableContent.map(async (content) => {
         const cacheKey = content.path;
         if (embeddingsCache.has(cacheKey)) {
           return embeddingsCache.get(cacheKey)!;
@@ -76,14 +76,20 @@ export async function getRelevantContent(query: string, maxResults = 5) {
       .sort((a: { similarity: number }, b: { similarity: number }) => b.similarity - a.similarity)
       .slice(0, maxResults)
       .filter((item: { similarity: number }) => item.similarity > 0.1) // Higher threshold for better quality
-      .map((item: { content: any }) => item.content);
+      .map(
+        (item: { content: { title: string; url: string; text: string; path: string } }) =>
+          item.content,
+      );
 
     // If no results meet the threshold, return the top 3 results anyway
     if (relevantContent.length === 0) {
       const fallbackContent = similarities
         .sort((a: { similarity: number }, b: { similarity: number }) => b.similarity - a.similarity)
         .slice(0, 3)
-        .map((item: { content: any }) => item.content);
+        .map(
+          (item: { content: { title: string; url: string; text: string; path: string } }) =>
+            item.content,
+        );
       console.log("No results met similarity threshold, using fallback content");
       return fallbackContent;
     }

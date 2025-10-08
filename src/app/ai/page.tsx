@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useChat, type UIMessage } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { Brain, Send, Loader2, X, FileText, Calendar, CheckSquare, Sparkles } from "lucide-react";
+import { Brain, Send, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -11,8 +11,8 @@ import { Markdown } from "@/components/markdown";
 
 export default function AIPage() {
   const [input, setInput] = useState("");
-  const [contextMode, setContextMode] = useState<"auto" | "research" | "all">("auto");
-  const [showQuickActions, setShowQuickActions] = useState(true);
+  // const [contextMode, setContextMode] = useState<"auto" | "research" | "all">("auto");
+  // const [showQuickActions, setShowQuickActions] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const chat = useChat({
@@ -22,7 +22,7 @@ export default function AIPage() {
     }),
   });
 
-  const { messages, status, sendMessage, stop } = chat;
+  const { messages, status, sendMessage } = chat;
   const isLoading = status === "streaming" || status === "submitted";
 
   // Debug: log messages to see what we're getting
@@ -42,7 +42,7 @@ export default function AIPage() {
     if (input.trim() && !isLoading) {
       sendMessage({ text: input });
       setInput("");
-      setShowQuickActions(false);
+      // setShowQuickActions(false);
     }
   };
 
@@ -53,28 +53,28 @@ export default function AIPage() {
     }
   };
 
-  const quickActions = [
-    {
-      icon: <Sparkles className="size-5" />,
-      title: "What's new in Navigator AI",
-      description: "Learn about the latest features and capabilities",
-    },
-    {
-      icon: <FileText className="size-5" />,
-      title: "Write application timeline",
-      description: "Create a personalized dental school application schedule",
-    },
-    {
-      icon: <FileText className="size-5" />,
-      title: "Analyze school requirements",
-      description: "Get detailed analysis of specific dental school requirements",
-    },
-    {
-      icon: <CheckSquare className="size-5" />,
-      title: "Create study plan",
-      description: "Build a comprehensive INBDE preparation schedule",
-    },
-  ];
+  // const quickActions = [
+  //   {
+  //     icon: <Sparkles className="size-5" />,
+  //     title: "What's new in Navigator AI",
+  //     description: "Learn about the latest features and capabilities",
+  //   },
+  //   {
+  //     icon: <FileText className="size-5" />,
+  //     title: "Write application timeline",
+  //     description: "Create a personalized dental school application schedule",
+  //   },
+  //   {
+  //     icon: <FileText className="size-5" />,
+  //     title: "Analyze school requirements",
+  //     description: "Get detailed analysis of specific dental school requirements",
+  //   },
+  //   {
+  //     icon: <CheckSquare className="size-5" />,
+  //     title: "Create study plan",
+  //     description: "Build a comprehensive INBDE preparation schedule",
+  //   },
+  // ];
 
   // const appIntegrations = [
   //   { name: "Notion", icon: "📝" },

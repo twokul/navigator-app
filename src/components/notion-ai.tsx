@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { RemoveScroll } from "react-remove-scroll";
 import { Presence } from "@radix-ui/react-presence";
-import { useChat } from "@ai-sdk/react";
+import { useChat, type UIMessage } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import {
   SearchIcon,
@@ -19,7 +19,6 @@ import {
   BarChart3,
 } from "lucide-react";
 import { cn } from "../lib/cn";
-import { buttonVariants } from "./ui/button";
 import { Markdown } from "./markdown";
 import Link from "fumadocs-core/link";
 import type { ProvideLinksToolSchema } from "../lib/ai-tools-schema";
@@ -324,7 +323,7 @@ export function NotionAI({ className }: NotionAIProps) {
   );
 }
 
-function Message({ message }: { message: any }) {
+function Message({ message }: { message: UIMessage<unknown> }) {
   let markdown = "";
   let links: z.infer<typeof ProvideLinksToolSchema>["links"] = [];
 

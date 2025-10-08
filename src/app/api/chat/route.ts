@@ -1,9 +1,9 @@
 import { ProvideLinksToolSchema } from "@/lib/ai-tools-schema";
 import { openai } from "@ai-sdk/openai";
 import { convertToModelMessages, streamText } from "ai";
-import { getRelevantContent } from "@/lib/semantic-search";
+import { getRelevantContentServer } from "@/lib/semantic-search-server";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 // In-memory rate limiting
 const userQueries = new Map<string, { count: number; resetTime: number }>();
@@ -81,11 +81,6 @@ function getCachedResponse(query: string, contextHash: string): string | null {
   return null;
 }
 
-function setCachedResponse(query: string, contextHash: string, response: string): void {
-  const cacheKey = `${query}:${contextHash}`;
-  queryCache.set(cacheKey, { response, timestamp: Date.now() });
-}
-
 export async function POST(req: Request) {
   const reqJson = await req.json();
 
@@ -127,7 +122,7 @@ Please try again later or consider upgrading your plan for higher limits.`;
   }
 
   // Get the user's latest message to search for relevant content
-  const userMessages = reqJson.messages.filter((msg: any) => msg.role === "user");
+  const userMessages = reqJson.messages.filter((msg: { role: string }) => msg.role === "user");
   const latestUserMessage = userMessages[userMessages.length - 1];
 
   // Debug: log the message structure
@@ -142,8 +137,8 @@ Please try again later or consider upgrading your plan for higher limits.`;
       // Handle structured content (e.g., with parts)
       if (latestUserMessage.content.parts) {
         query = latestUserMessage.content.parts
-          .filter((part: any) => part.type === "text")
-          .map((part: any) => part.text)
+          .filter((part: { type: string }) => part.type === "text")
+          .map((part: { text: string }) => part.text)
           .join(" ");
       } else if (latestUserMessage.content.text) {
         query = latestUserMessage.content.text;
@@ -151,8 +146,8 @@ Please try again later or consider upgrading your plan for higher limits.`;
     } else if (latestUserMessage.parts) {
       // Handle direct parts array (as shown in the debug log)
       query = latestUserMessage.parts
-        .filter((part: any) => part.type === "text")
-        .map((part: any) => part.text)
+        .filter((part: { type: string }) => part.type === "text")
+        .map((part: { text: string }) => part.text)
         .join(" ");
     }
   }
@@ -166,7 +161,7 @@ Please try again later or consider upgrading your plan for higher limits.`;
   }
 
   // Get relevant content using semantic search
-  const relevantContent = await getRelevantContent(query, 3);
+  const relevantContent = await getRelevantContentServer(query, 3);
 
   // Create context hash for caching (based on relevant content)
   const contextHash = relevantContent
@@ -191,6 +186,12 @@ Please try again later or consider upgrading your plan for higher limits.`;
     )
     .join("\n\n---\n\n");
 
+  // Debug: log the context content to see what URLs are being passed
+  console.log(
+    "Context content URLs:",
+    relevantContent.map((c) => c.url),
+  );
+
   // Create system message with only relevant documentation context
   const systemMessage = {
     role: "system" as const,
@@ -210,6 +211,7 @@ Instructions:
 6. For Advanced Standing Program questions, focus on the comprehensive information about ASP requirements, process, and benefits
 7. Always provide actionable next steps when discussing the application process
 8. NEVER use absolute URLs with domains - always use relative URLs starting with "/c/"
+9. CRITICAL: All URLs must be relative paths like "/c/toefl" NOT absolute URLs like "https://domain.com/c/toefl"
 
 User's question: ${query}`,
   };
