@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { Compass } from "lucide-react";
+import { Compass, Brain } from "lucide-react";
 
 /**
  * Shared layout configurations
@@ -20,11 +20,11 @@ export function baseOptions(): BaseLayoutProps {
     },
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [
-      // {
-      //   icon: <Brain />,
-      //   text: "Navigator AI",
-      //   url: "/n",
-      // },
+      {
+        icon: <Brain />,
+        text: "Navigator AI",
+        url: "/ai",
+      },
     ],
   };
 }
