@@ -1,8 +1,3 @@
 {
-  "pages": [
-    "how-to-choose-schools",
-    "externship-programs",
-    "what-dental-schools-look-for",
-    "schools-database"
-  ]
+  "pages": ["index", "externship-programs", "what-dental-schools-look-for", "schools-database"]
 }
