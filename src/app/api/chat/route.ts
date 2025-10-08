@@ -5,8 +5,126 @@ import { getRelevantContent } from "@/lib/semantic-search";
 
 export const runtime = "edge";
 
+// In-memory rate limiting
+const userQueries = new Map<string, { count: number; resetTime: number }>();
+const DAILY_LIMIT = 15; // queries per day per user
+const HOURLY_LIMIT = 5; // queries per hour per user
+
+// In-memory query caching
+const queryCache = new Map<string, { response: string; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+// Rate limiting function
+function checkRateLimit(userId: string): {
+  allowed: boolean;
+  remaining: number;
+  resetTime: number;
+} {
+  const now = Date.now();
+  const user = userQueries.get(userId) || { count: 0, resetTime: now + 24 * 60 * 60 * 1000 };
+
+  // Reset daily limit if 24 hours have passed
+  if (now > user.resetTime) {
+    user.count = 0;
+    user.resetTime = now + 24 * 60 * 60 * 1000;
+  }
+
+  // Check hourly limit (simple implementation)
+  const hourlyReset = now + 60 * 60 * 1000; // 1 hour from now
+  const isNewHour =
+    !userQueries.has(userId + "_hourly") ||
+    (userQueries.get(userId + "_hourly")?.resetTime || 0) < now;
+
+  if (isNewHour) {
+    userQueries.set(userId + "_hourly", { count: 0, resetTime: hourlyReset });
+  }
+
+  const hourlyCount = userQueries.get(userId + "_hourly")?.count || 0;
+
+  // Check limits
+  if (user.count >= DAILY_LIMIT) {
+    return { allowed: false, remaining: 0, resetTime: user.resetTime };
+  }
+
+  if (hourlyCount >= HOURLY_LIMIT) {
+    return {
+      allowed: false,
+      remaining: Math.max(0, DAILY_LIMIT - user.count),
+      resetTime: hourlyReset,
+    };
+  }
+
+  // Update counts
+  user.count++;
+  userQueries.set(userId, user);
+
+  const hourly = userQueries.get(userId + "_hourly")!;
+  hourly.count++;
+  userQueries.set(userId + "_hourly", hourly);
+
+  return {
+    allowed: true,
+    remaining: DAILY_LIMIT - user.count,
+    resetTime: user.resetTime,
+  };
+}
+
+// Query caching function
+function getCachedResponse(query: string, contextHash: string): string | null {
+  const cacheKey = `${query}:${contextHash}`;
+  const cached = queryCache.get(cacheKey);
+
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.response;
+  }
+
+  return null;
+}
+
+function setCachedResponse(query: string, contextHash: string, response: string): void {
+  const cacheKey = `${query}:${contextHash}`;
+  queryCache.set(cacheKey, { response, timestamp: Date.now() });
+}
+
 export async function POST(req: Request) {
   const reqJson = await req.json();
+
+  // Extract user ID from request (you may need to adjust this based on your auth setup)
+  const userId = reqJson.userId || req.headers.get("x-user-id") || "anonymous";
+
+  // Check rate limiting
+  const rateLimit = checkRateLimit(userId);
+  if (!rateLimit.allowed) {
+    const resetTime = new Date(rateLimit.resetTime);
+    const timeUntilReset = Math.ceil((resetTime.getTime() - Date.now()) / (1000 * 60)); // minutes
+
+    // Return a streaming response that the frontend can handle
+    const errorMessage = `🚫 **Rate Limit Reached**
+
+You've used all ${DAILY_LIMIT} of your daily queries. 
+
+**Time until reset:** ${timeUntilReset} minutes
+**Remaining queries:** ${rateLimit.remaining}
+
+Please try again later or consider upgrading your plan for higher limits.`;
+
+    const result = streamText({
+      model: openai("gpt-4o-mini"),
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a helpful assistant. Respond with the exact message provided by the user.",
+        },
+        {
+          role: "user",
+          content: errorMessage,
+        },
+      ],
+    });
+
+    return result.toUIMessageStreamResponse();
+  }
 
   // Get the user's latest message to search for relevant content
   const userMessages = reqJson.messages.filter((msg: any) => msg.role === "user");
@@ -49,6 +167,21 @@ export async function POST(req: Request) {
 
   // Get relevant content using semantic search
   const relevantContent = await getRelevantContent(query, 3);
+
+  // Create context hash for caching (based on relevant content)
+  const contextHash = relevantContent
+    .map((c) => c.path)
+    .sort()
+    .join("|");
+
+  // Check cache first
+  const cachedResponse = getCachedResponse(query, contextHash);
+  if (cachedResponse) {
+    console.log("Returning cached response for query:", query);
+    return new Response(cachedResponse, {
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
 
   // Create context from relevant content
   const contextContent = relevantContent
